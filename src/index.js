@@ -5,9 +5,9 @@ import { Login } from './Containers/Login'
 import GlobalStyle from './styles/globalStyles'
 
 ReactDOM.render(
-    <>
-        <Login/>
-        <GlobalStyle/>
-    </>
-    , document.getElementById('root')
+  <>
+    <Login />
+    <GlobalStyle />
+  </>,
+  document.getElementById('root')
 )
