@@ -42,7 +42,7 @@ export const H1 = styled.p`
   font-weight: 500;
   font-size: 24px;
   line-height: 28px;
-  margin-top: 5.25rem;
+  margin-top: 0.625rem;
   text-align: center;
 `
 
@@ -52,10 +52,11 @@ export const Label = styled.label`
   font-size: 12px;
   line-height: 14px;
 
-  margin: 1.75rem 0 5px 4.5rem;
+  margin: ${props =>
+    props.error ? '0.75rem 0 5px 4.5rem' : '1.75rem 0 5px 4.5rem'};
 `
 
-export const InputLogin = styled.input`
+export const InputRegister = styled.input`
   width: 24.46rem;
   height: 2.4rem;
   margin: 0 4.5rem 0 4.5rem;
