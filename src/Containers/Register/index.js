@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -44,12 +45,28 @@ export function Register() {
   } = useForm({ resolver: yupResolver(schema) })
   // conexão com o back-end
   const onSubmit = async clientData => {
-    const response = await apiCodeBurgue.post('users', {
-      name: clientData.name,
-      email: clientData.email,
-      password: clientData.password
-    })
-    console.log(response)
+    try {
+      const { status } = await apiCodeBurgue.post(
+        'users',
+        {
+          name: clientData.name,
+          email: clientData.email,
+          password: clientData.password
+        },
+        { validateStatus: () => true }
+      )
+      if (status === 201 || status === 200) {
+        toast.success('Parabéns, seu cadastro deu certo 😁🥳')
+      } else if (status === 409) {
+        toast.error(
+          'Eita, eita, este E-mail já está cadastrado, vá para login, para continuar'
+        )
+      } else {
+        throw new Error()
+      }
+    } catch (err) {
+      toast.error('Falha no sistema! Tente novamente.')
+    }
   }
 
   return (

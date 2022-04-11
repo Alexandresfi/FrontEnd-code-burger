@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
@@ -39,10 +40,18 @@ export function Login() {
   } = useForm({ resolver: yupResolver(schema) })
   // conexão com o back-end
   const onSubmit = async clientData => {
-    const response = await apiCodeBurgue.post('sessions', {
-      email: clientData.email,
-      password: clientData.password
-    })
+    const response = await toast.promise(
+      apiCodeBurgue.post('sessions', {
+        email: clientData.email,
+        password: clientData.password
+      }),
+      {
+        pending: 'Verificando informações...',
+        success: 'Login efetuado com sucesso!',
+        error: 'Opa, email ou senha incorreta!'
+      }
+    )
+
     console.log(response)
   }
 
