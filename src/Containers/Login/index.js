@@ -1,5 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
+import { Link } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -8,6 +9,7 @@ import * as yup from 'yup'
 import LoginImage from '../../assets/login-image.svg'
 import LogoImage from '../../assets/logo.svg'
 import Button from '../../components/Button'
+import { UseUser } from '../../hooks/UserContext'
 import { apiCodeBurgue } from '../../services/api'
 import {
   Container,
@@ -23,6 +25,7 @@ import {
 } from './styles'
 
 export function Login() {
+  const { putUserData, userData } = UseUser()
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -40,19 +43,27 @@ export function Login() {
   } = useForm({ resolver: yupResolver(schema) })
   // conexão com o back-end
   const onSubmit = async clientData => {
-    const response = await toast.promise(
-      apiCodeBurgue.post('sessions', {
-        email: clientData.email,
-        password: clientData.password
-      }),
-      {
-        pending: 'Verificando informações...',
-        success: 'Login efetuado com sucesso!',
-        error: 'Opa, email ou senha incorreta!'
+    try {
+      const { status, data } = await apiCodeBurgue.post(
+        'sessions',
+        {
+          email: clientData.email,
+          password: clientData.password
+        },
+        { validateStatus: () => true }
+      )
+      if (status === 201 || status === 200) {
+        toast.success('Login realizado com sucesso 🤩')
+        putUserData(data)
+        console.log(userData)
+      } else if (status === 401) {
+        toast.error('Verifique seu e-mail e senha 🤯')
+      } else {
+        throw new Error()
       }
-    )
-
-    console.log(response)
+    } catch (error) {
+      toast.error('Falha no sistema! Tente novamente.')
+    }
   }
 
   return (
@@ -92,7 +103,7 @@ export function Login() {
           </form>
 
           <LinkSignUp>
-            Não possui conta? <a href="#">Sign up</a>
+            Não possui conta? <Link to="/cadastro">Sign up</Link>
           </LinkSignUp>
         </ContainerItens>
       </Content>
