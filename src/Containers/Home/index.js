@@ -1,5 +1,14 @@
 import React from 'react'
 
+import BannerHome from '../../assets/home/banner-home.png'
+import { CategoryCarrousel } from '../../components/CategoryCarrousel'
+import { Container, ImgBanner } from './styled'
+
 export function Home() {
-  return <div>Home</div>
+  return (
+    <Container>
+      <ImgBanner src={BannerHome} alt="banner" />
+      <CategoryCarrousel />
+    </Container>
+  )
 }

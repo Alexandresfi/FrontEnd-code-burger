@@ -1,6 +1,6 @@
 import React from 'react'
 import { useForm } from 'react-hook-form'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 import { toast } from 'react-toastify'
 
 import { yupResolver } from '@hookform/resolvers/yup'
@@ -25,7 +25,8 @@ import {
 } from './styles'
 
 export function Login() {
-  const { putUserData, userData } = UseUser()
+  const history = useHistory()
+  const { putUserData } = UseUser()
   const schema = yup.object().shape({
     email: yup
       .string()
@@ -55,7 +56,10 @@ export function Login() {
       if (status === 201 || status === 200) {
         toast.success('Login realizado com sucesso 🤩')
         putUserData(data)
-        console.log(userData)
+
+        setTimeout(() => {
+          history.push('/')
+        }, 1000)
       } else if (status === 401) {
         toast.error('Verifique seu e-mail e senha 🤯')
       } else {
