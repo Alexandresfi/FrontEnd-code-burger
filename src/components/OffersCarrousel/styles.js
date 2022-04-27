@@ -1,7 +1,7 @@
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 export const Container = styled.div`
-  background: #efefef;
+  background: #fff;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -43,7 +43,7 @@ export const Button = styled.button`
   background: #9758a6;
   border: none;
 
-  font-family: 'Roboto';
+  font-family: 'Source Sans Pro';
   font-style: normal;
   font-weight: 700;
   font-size: 18px;
@@ -64,4 +64,22 @@ export const Button = styled.button`
 export const Image = styled.img`
   width: 200px;
   border-radius: 10px;
+`
+
+export const P = styled.p`
+  font-family: 'Source Sans Pro';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 18px;
+  line-height: 120%;
+
+  margin-top: 16px;
+
+  ${price =>
+    price &&
+    css`
+      margin-top: 8px;
+      color: #212121;
+      width: 199px;
+    `}
 `

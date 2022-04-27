@@ -3,7 +3,7 @@ import Carousel from 'react-elastic-carousel'
 
 import Category from '../../assets/home/category.png'
 import { apiCodeBurgue } from '../../services/api'
-import { Container, CategoryImg } from './styles'
+import { Container, CategoryImg, ContainerItems, Button, Image } from './styles'
 
 export function CategoryCarrousel() {
   const [categories, setCategories] = useState([])
@@ -11,7 +11,7 @@ export function CategoryCarrousel() {
     async function loadCategories() {
       const { data } = await apiCodeBurgue.get('categories')
       setCategories(data)
-      console.log(data)
+      // console.log(data)
     }
     loadCategories()
   }, [])
@@ -33,10 +33,10 @@ export function CategoryCarrousel() {
         breakPoints={breakpoints}
       >
         {categories?.map((item, index) => (
-          <div key={index}>
-            <img src={item.url} alt={item.name} />
-            <button>{item.name}</button>
-          </div>
+          <ContainerItems key={index}>
+            <Image src={item.url} alt={item.name} />
+            <Button>{item.name}</Button>
+          </ContainerItems>
         ))}
       </Carousel>
     </Container>
