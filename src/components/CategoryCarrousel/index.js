@@ -11,7 +11,6 @@ export function CategoryCarrousel() {
     async function loadCategories() {
       const { data } = await apiCodeBurgue.get('categories')
       setCategories(data)
-      // console.log(data)
     }
     loadCategories()
   }, [])

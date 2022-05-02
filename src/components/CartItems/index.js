@@ -6,7 +6,6 @@ import { Body, Container, EmptyCart, Header } from './styled'
 
 export function CartItems() {
   const { cartProducts, increasseProducts, decreasseProducts } = UseCart()
-  console.log(cartProducts)
   return (
     <Container>
       <Header>

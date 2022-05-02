@@ -20,7 +20,6 @@ export function OffersCarrousel() {
       const { data } = await apiCodeBurgue.get('/products')
       const onlyoffers = data.filter(product => product.offer)
       setOffers(onlyoffers)
-      console.log(onlyoffers)
     }
     loadOffers()
   }, [])
