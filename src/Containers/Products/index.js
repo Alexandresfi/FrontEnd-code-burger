@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 
 import ProductsLogo from '../../assets/product-logo.svg'
-import { CardProduct } from '../../components/CardProduct'
+import { CartProduct } from '../../components/CartProduct'
 import { apiCodeBurgue } from '../../services/api'
 import {
   Container,
@@ -60,7 +60,7 @@ export function Products() {
       </CategoriesMenu>
       <ProductsContainer>
         {filteredProducts?.map(product => (
-          <CardProduct key={product.id} product={product} />
+          <CartProduct key={product.id} product={product} />
         ))}
       </ProductsContainer>
     </Container>
