@@ -14,7 +14,7 @@ import {
 } from './styled'
 
 export function Header() {
-  const { logout } = UseUser()
+  const { logout, userData } = UseUser()
   const {
     push,
     location: { pathname }
@@ -47,7 +47,7 @@ export function Header() {
         </PageLink>
 
         <ContainerText>
-          <p>Olá, Alexandre Nascimento</p>
+          <p>Olá, {userData.name}</p>
           <PageLink>
             <p onClick={logoutUser}>Sair</p>
           </PageLink>

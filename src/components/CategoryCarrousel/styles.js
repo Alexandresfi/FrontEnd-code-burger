@@ -1,3 +1,5 @@
+import { Link } from 'react-router-dom'
+
 import styled from 'styled-components'
 
 export const Container = styled.div`
@@ -35,13 +37,18 @@ export const ContainerItems = styled.div`
   border-radius: 10px;
 `
 
-export const Button = styled.button`
+export const Button = styled(Link)`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   width: 200px;
   height: 66px;
   border-radius: 8px;
   margin: 16px 0 61px 0;
   background: #9758a6;
   border: none;
+  text-decoration: none;
 
   font-family: 'Roboto';
   font-style: normal;
