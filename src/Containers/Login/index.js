@@ -55,10 +55,11 @@ export function Login() {
       )
       if (status === 201 || status === 200) {
         toast.success('Login realizado com sucesso 🤩')
+
         putUserData(data)
 
         setTimeout(() => {
-          history.push('/')
+          data.admin ? history.push('/pedidos') : history.push('/')
         }, 1000)
       } else if (status === 401) {
         toast.error('Verifique seu e-mail e senha 🤯')
