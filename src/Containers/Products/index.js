@@ -23,6 +23,7 @@ export function Products({ location: { state } }) {
   const [products, setProducts] = useState([])
   const [activeCategory, setActiveCategory] = useState(categoryId)
   const [filteredProducts, setFilteredProducts] = useState([])
+
   useEffect(() => {
     async function loadCategories() {
       const { data } = await apiCodeBurgue.get('categories')
