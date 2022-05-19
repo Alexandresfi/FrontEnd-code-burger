@@ -13,8 +13,25 @@ import TableRow from '@mui/material/TableRow'
 import Typography from '@mui/material/Typography'
 import PropTypes from 'prop-types'
 
+import { apiCodeBurgue } from '../../../services/api'
+import { status } from './order-status'
+import { ProductsImg, ReactSelectStyle } from './styles'
+
 export function Row({ row }) {
   const [open, setOpen] = React.useState(false)
+  const [isLoading, setIsLoading] = React.useState(false)
+
+  async function updateStatus(id, status) {
+    setIsLoading(true)
+    try {
+      await apiCodeBurgue.put(`orders/${id}`, { status })
+    } catch (err) {
+      console.log(err)
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
   return (
     <React.Fragment>
       <TableRow sx={{ '& > *': { borderBottom: 'unset' } }}>
@@ -32,7 +49,20 @@ export function Row({ row }) {
         </TableCell>
         <TableCell>{row.name}</TableCell>
         <TableCell>{row.date}</TableCell>
-        <TableCell>{row.status}</TableCell>
+        <TableCell>
+          <ReactSelectStyle
+            options={status}
+            menuPortalTarget={document.body}
+            placeholder="Status"
+            defaultValue={
+              status.find(option => option.value === row.status) || null
+            }
+            onChange={newStatus => {
+              updateStatus(row.orderId, newStatus.value)
+            }}
+            isLoading={isLoading}
+          />
+        </TableCell>
       </TableRow>
       <TableRow>
         <TableCell style={{ paddingBottom: 0, paddingTop: 0 }} colSpan={6}>
@@ -47,6 +77,7 @@ export function Row({ row }) {
                     <TableCell>Quantidade</TableCell>
                     <TableCell>Produto</TableCell>
                     <TableCell>Categoria</TableCell>
+                    <TableCell>Imagens </TableCell>
                   </TableRow>
                 </TableHead>
                 <TableBody>
@@ -58,7 +89,10 @@ export function Row({ row }) {
                       <TableCell>{productRow.name}</TableCell>
                       <TableCell>{productRow.category}</TableCell>
                       <TableCell>
-                        <img src={productRow.url} alt="imagem-do-produto" />
+                        <ProductsImg
+                          src={productRow.url}
+                          alt="imagem-do-produto"
+                        />
                       </TableCell>
                     </TableRow>
                   ))}

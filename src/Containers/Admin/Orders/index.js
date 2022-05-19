@@ -9,6 +9,7 @@ import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 
 import { apiCodeBurgue } from '../../../services/api'
+import { formatDate } from '../../../utils/formatDate'
 import { Row } from './row'
 import { Container } from './styles'
 
@@ -30,7 +31,7 @@ export function Orders() {
     return {
       name: order.user.name,
       orderId: order._id,
-      date: order.createdAt,
+      date: formatDate(order.createdAt),
       status: order.status,
       products: order.products
     }
@@ -40,8 +41,6 @@ export function Orders() {
     const newRows = orders.map(ord => createData(ord))
     setRows(newRows)
   }, [orders])
-
-  console.log(rows)
 
   return (
     <Container>
@@ -58,7 +57,7 @@ export function Orders() {
           </TableHead>
           <TableBody>
             {rows.map(row => (
-              <Row key={row.id} row={row} />
+              <Row key={row.orderId} row={row} />
             ))}
           </TableBody>
         </Table>
