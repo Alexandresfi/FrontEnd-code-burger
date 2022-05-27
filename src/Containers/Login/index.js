@@ -9,6 +9,7 @@ import * as yup from 'yup'
 import LoginImage from '../../assets/login-image.svg'
 import LogoImage from '../../assets/logo.svg'
 import Button from '../../components/Button'
+import paths from '../../constantes/paths'
 import { UseUser } from '../../hooks/UserContext'
 import { apiCodeBurgue } from '../../services/api'
 import {
@@ -108,7 +109,7 @@ export function Login() {
           </form>
 
           <LinkSignUp>
-            Não possui conta? <Link to="/cadastro">Sign up</Link>
+            Não possui conta? <Link to={paths.register}>Sign up</Link>
           </LinkSignUp>
         </ContainerItens>
       </Content>

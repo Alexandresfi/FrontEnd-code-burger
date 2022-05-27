@@ -1,6 +1,7 @@
 import React from 'react'
 import { Switch, Route, BrowserRouter as Router } from 'react-router-dom'
 
+import paths from '../constantes/paths'
 import { Admin } from '../Containers/Admin'
 import { Cart } from '../Containers/Cart'
 import { Home } from '../Containers/Home'
@@ -13,12 +14,19 @@ export function Routes() {
   return (
     <Router>
       <Switch>
-        <Route component={Login} path="/login" />
-        <Route component={Register} exact path="/cadastro" />
-        <PrivateRoute component={Home} exact path="/" />
-        <PrivateRoute component={Products} exact path="/produtos" />
-        <PrivateRoute component={Cart} exact path="/carrinho" />
-        <PrivateRoute component={Admin} exact path="/pedidos" isAdmin />
+        <Route component={Login} path={paths.login} />
+        <Route component={Register} exact path={paths.register} />
+        <PrivateRoute component={Home} exact path={paths.home} />
+        <PrivateRoute component={Products} exact path={paths.products} />
+        <PrivateRoute component={Cart} exact path={paths.cart} />
+
+        <PrivateRoute component={Admin} exact path={paths.order} isAdmin />
+        <PrivateRoute
+          component={Admin}
+          exact
+          path={paths.Listproducts}
+          isAdmin
+        />
       </Switch>
     </Router>
   )

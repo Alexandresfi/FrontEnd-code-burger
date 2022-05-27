@@ -9,6 +9,7 @@ import * as yup from 'yup'
 import LogoImage from '../../assets/logo.svg'
 import RegisterImage from '../../assets/register-image.svg'
 import Button from '../../components/Button'
+import paths from '../../constantes/paths'
 import { apiCodeBurgue } from '../../services/api'
 import {
   Container,
@@ -120,7 +121,7 @@ export function Register() {
           </form>
 
           <LinkSignUp>
-            Já possui conta? <Link to="/login">Sign In</Link>
+            Já possui conta? <Link to={paths.login}>Sign In</Link>
           </LinkSignUp>
         </ContainerItens>
       </Content>
